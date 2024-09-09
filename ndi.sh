@@ -18,6 +18,58 @@
 # VERSION
 # Options:
 #
+# Linux x86_64/AMD64/EM64T
+#
+# Latest Legacy GPU version (470.xx series): 470.256.02
+# Latest Legacy GPU version (390.xx series): 390.157
+# Latest Legacy GPU version (340.xx series): 340.108
+# Latest Legacy GPU version (304.xx series): 304.137
+# Latest Legacy GPU Version (71.86.xx series): 71.86.15
+# Latest Legacy GPU Version (96.43.xx series): 96.43.23
+# Latest Legacy GPU Version (173.14.xx series): 173.14.39
+#
+# Linux x86/IA32
+#
+# Latest Legacy GPU version (390.xx series): 390.157
+# Latest Legacy GPU version (340.xx series): 340.108
+# Latest Legacy GPU version (304.xx series): 304.137
+# Latest Legacy GPU version (71.86.xx series): 71.86.15
+# Latest Legacy GPU version (96.43.xx series): 96.43.23
+# Latest Legacy GPU version (173.14.xx series): 173.14.39
+#
+# Linux aarch64
+#
+# Latest Legacy GPU version (470.xx series): 470.256.02
+#
+# Linux 32-bit ARM
+#
+# Latest Legacy GPU version (390.xx series): 390.157
+#
+# FreeBSD x86
+#
+# Latest Legacy GPU version (390.xx series): 390.157
+# Latest Legacy GPU version (340.xx series): 340.108
+# Latest Legacy GPU version (304.xx series): 304.137
+# Latest Legacy GPU Version (71.86.xx series): 71.86.15
+# Latest Legacy GPU Version (96.43.xx series): 96.43.23
+# Latest Legacy GPU Version (173.14.xx series): 173.14.39
+#
+# FreeBSD x64
+#
+# Latest Legacy GPU version (470.xx series): 470.256.02
+# Latest Legacy GPU version (390.xx series): 390.157
+# Latest Legacy GPU version (340.xx series): 340.108
+# Latest Legacy GPU version (304.xx series): 304.137
+#
+# Solaris x64/x86
+#
+# Latest Legacy GPU version (470.xx series): 470.256.02
+# Latest Legacy GPU version (390.xx series): 390.157
+# Latest Legacy GPU version (340.xx series): 340.108
+# Latest Legacy GPU version (304.xx series): 304.137
+# Latest Legacy GPU version (96.43.xx series): 96.43.23
+# Latest Legacy GPU version (173.14.xx series): 173.14.39
+
 
 PLATFORM=$1
 TYPE=$2
