@@ -98,6 +98,19 @@ else
     exit
 fi
 
+args=("$@")
+
+for (( i=0; i<=$#; i++ )); do
+
+    if [[ "${args[$i]}" == "-P" ]] || [[ "${args[$i]}" == "--platform" ]]; then PLATFORM="${args[$i + 1]}"
+
+    elif [[ "${args[$i]}" == "-A" ]] || [[ "${args[$i]}" == "--arch" ]]; then ARCH="${args[$i + 1]}" 
+
+    elif [[ "${args[$i]}" == "-V" ]] || [[ "${args[$i]}" == "--version" ]]; then  VERSION="${args[$i + 1]}" 
+
+    fi
+done
+
 FILE=NVIDIA-${TYPE}-${ARCH}-${VERSION}.run
 URL=https://us.download.nvidia.com/${PLATFORM}/${TYPE}-${ARCH}/${VERSION}/${FILE}
 
