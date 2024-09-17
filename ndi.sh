@@ -73,8 +73,22 @@
 
 PLATFORM=$1
 TYPE=$2
-ARCH=$3
 VERSION=$4
+
+if [[ "$(uname --machine)" == "x86_64" ]]; then ARCH="x86_64"
+
+elif [[ "$(uname --machine)" == "i686" ]]; then ARCH="x86"
+
+elif [[ "$(uname --machine)" == "aarch64" ]]; then ARCH="aarch64"
+
+elif [[ "$(uname --machine)" == "armv7l" ]]; then ARCH="arm"
+
+else 
+    echo "failed to detect ARCH"
+    echo "use instead --A= or --arch="
+    echo "for example: --arch=x86_64"
+    exit
+fi
 
 FILE=NVIDIA-${TYPE}-${ARCH}-${VERSION}.run
 URL=https://us.download.nvidia.com/${PLATFORM}/${TYPE}-${ARCH}/${VERSION}/${FILE}
