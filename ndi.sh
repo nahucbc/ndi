@@ -71,9 +71,20 @@
 # Latest Legacy GPU version (173.14.xx series): 173.14.39
 
 
-PLATFORM=$1
-TYPE=$2
 VERSION=$4
+
+if [[ "$(uname --kernel-name)" == "Linux" ]]; then PLATFORM="XFree86" TYPE="Linux"
+
+elif [[ "$(uname --kernel-name)" == "FreeBSD" ]]; then PLATFORM="XFree86" TYPE="FreeBSD"
+
+elif [[ "$(uname --kernel-name)" == "SunOS" ]]; then PLATFORM="Solaris"
+
+else 
+    echo "failed to detect PLATFORM"
+    echo "use instead --P= or --platform="
+    echo "for example: --platform=linux"
+    exit
+fi
 
 if [[ "$(uname --machine)" == "x86_64" ]]; then ARCH="x86_64"
 
