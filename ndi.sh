@@ -111,6 +111,13 @@ for (( i=0; i<=$#; i++ )); do
     fi
 done
 
+if [[ -z "${VERSION}" ]]; then
+    echo "version is not declared"
+    echo "declare it with -V or --version"
+    echo "for example: --version 470.256.02"
+    exit
+fi
+
 FILE=NVIDIA-${TYPE}-${ARCH}-${VERSION}.run
 URL=https://us.download.nvidia.com/${PLATFORM}/${TYPE}-${ARCH}/${VERSION}/${FILE}
 
