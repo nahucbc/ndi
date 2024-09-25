@@ -97,7 +97,7 @@ for (( i=0; i<$#; i++ )); do
     if [[ "${ARGS[$i]}" == "-P" ]] || [[ "${ARGS[$i]}" == "--platform" ]]; then
         if [[ "${ARGS[$i + 1]}" == "Linux" ]]; then PLATFORM="XFree86" TYPE="Linux"
         elif [[ "${ARGS[$i + 1]}" == "FreeBSD" ]]; then PLATFORM="XFree86" TYPE="FreeBSD"
-        elif [[ "${ARGS[$i + 1]}" == "SunOS" ]]; then PLATFORM="Solaris"
+        elif [[ "${ARGS[$i + 1]}" == "SunOS"  || "${ARGS[$i + 1]}" == "Solaris" ]]; then PLATFORM="Solaris"
         fi
         i=$((i + 1))
         continue
