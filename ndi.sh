@@ -90,15 +90,15 @@ elif [[ "$(uname --machine)" == "armv7l" ]]; then ARCH="arm"
 
 fi
 
-args=("$@")
+ARGS=("$@")
 
 for (( i=0; i<=$#; i++ )); do
 
-    if [[ "${args[$i]}" == "-P" ]] || [[ "${args[$i]}" == "--platform" ]]; then PLATFORM="${args[$i + 1]}"
+    if [[ "${ARGS[$i]}" == "-P" ]] || [[ "${ARGS[$i]}" == "--platform" ]]; then PLATFORM="${ARGS[$i + 1]}"
 
-    elif [[ "${args[$i]}" == "-A" ]] || [[ "${args[$i]}" == "--arch" ]]; then ARCH="${args[$i + 1]}" 
+    elif [[ "${ARGS[$i]}" == "-A" ]] || [[ "${ARGS[$i]}" == "--arch" ]]; then ARCH="${ARGS[$i + 1]}" 
 
-    elif [[ "${args[$i]}" == "-V" ]] || [[ "${args[$i]}" == "--version" ]]; then  VERSION="${args[$i + 1]}" 
+    elif [[ "${ARGS[$i]}" == "-V" ]] || [[ "${ARGS[$i]}" == "--version" ]]; then  VERSION="${ARGS[$i + 1]}" 
 
     fi
 done
