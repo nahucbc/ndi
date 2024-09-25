@@ -91,6 +91,8 @@ elif [[ "$(uname --machine)" == "armv7l" ]]; then ARCH="arm"
 fi
 
 ARGS=("$@")
+INSTALLER_ARGS=""
+INSTALLER_ARGS+="--rebuild-initramfs --silent "
 
 for (( i=0; i<$#; i++ )); do
 
@@ -115,6 +117,18 @@ for (( i=0; i<$#; i++ )); do
 
     if [[ "${ARGS[$i]}" == "-V" ]] || [[ "${ARGS[$i]}" == "--version" ]]; then  
         VERSION="${ARGS[$i + 1]}" 
+        i=$((i + 1)) 
+        continue
+    fi
+
+    if [[ "${ARGS[$i]}" == "--open" ]]; then  
+        INSTALLER_ARGS+="--kernel-module-type=open "
+        i=$((i + 1)) 
+        continue
+    fi
+
+    if [[ "${ARGS[$i]}" == "--propietary" ]]; then  
+        INSTALLER_ARGS+="--kernel-module-type=propietary "
         i=$((i + 1)) 
         continue
     fi
@@ -155,5 +169,5 @@ fi
 
 wget -c $URL
 chmod +x $FILE
-./${FILE}
+./${FILE} $INSTALLER_ARGS
 rm $FILE
