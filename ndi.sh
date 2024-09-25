@@ -131,4 +131,8 @@ elif [[ "$PLATFORM" == "Solaris" ]]; then
     FILE=NVIDIA-$PLATFORM-x86-${VERSION}.run
     URL=https://us.download.nvidia.com/solaris/${VERSION}/${FILE}
 fi
-wget $URL
+
+wget -c $URL
+chmod +x $FILE
+./${FILE}
+rm $FILE
