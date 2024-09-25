@@ -120,9 +120,6 @@ if [[ -z "${VERSION}" ]]; then
     exit
 fi
 
-FILE=NVIDIA-${TYPE}-${ARCH}-${VERSION}.run
-URL=https://us.download.nvidia.com/${PLATFORM}/${TYPE}-${ARCH}/${VERSION}/${FILE}
-
 if [[ "$ARCH " == "arm" ]]; then
     FILE=NVIDIA-${TYPE}-armv7l-gnueabihf-${VERSION}.run
     URL=https://us.download.nvidia.com/${PLATFORM}/${TYPE}-x86-ARM/${VERSION}/${FILE}
@@ -130,6 +127,9 @@ if [[ "$ARCH " == "arm" ]]; then
 elif [[ "$PLATFORM" == "Solaris" ]]; then
     FILE=NVIDIA-$PLATFORM-x86-${VERSION}.run
     URL=https://us.download.nvidia.com/solaris/${VERSION}/${FILE}
+else
+    FILE=NVIDIA-${TYPE}-${ARCH}-${VERSION}.run
+    URL=https://us.download.nvidia.com/${PLATFORM}/${TYPE}-${ARCH}/${VERSION}/${FILE}
 fi
 
 wget -c $URL
