@@ -78,11 +78,6 @@ elif [[ "$(uname --kernel-name)" == "FreeBSD" ]]; then PLATFORM="XFree86" TYPE="
 
 elif [[ "$(uname --kernel-name)" == "SunOS" ]]; then PLATFORM="Solaris"
 
-else 
-    echo "failed to detect PLATFORM"
-    echo "use instead -P or --platform "
-    echo "for example: --platform linux"
-    exit
 fi
 
 if [[ "$(uname --machine)" == "x86_64" ]]; then ARCH="x86_64"
@@ -93,11 +88,6 @@ elif [[ "$(uname --machine)" == "aarch64" ]]; then ARCH="aarch64"
 
 elif [[ "$(uname --machine)" == "armv7l" ]]; then ARCH="arm"
 
-else 
-    echo "failed to detect ARCH"
-    echo "use instead -A or --arch"
-    echo "for example: --arch x86_64"
-    exit
 fi
 
 args=("$@")
@@ -117,6 +107,20 @@ if [[ -z "${VERSION}" ]]; then
     echo "version is not declared"
     echo "declare it with -V or --version"
     echo "for example: --version 470.256.02"
+    exit
+fi
+
+if [[ -z "${PLATFORM}" ]]; then
+    echo "failed to detect PLATFORM"
+    echo "use instead -P or --platform "
+    echo "for example: --platform linux"
+    exit
+fi
+
+if [[ -z "${ARCH}" ]]; then
+    echo "failed to detect ARCH"
+    echo "use instead -A or --arch"
+    echo "for example: --arch x86_64"
     exit
 fi
 
