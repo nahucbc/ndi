@@ -98,6 +98,10 @@ for (( i=0; i<$#; i++ )); do
         if [[ "${ARGS[$i + 1]}" == "Linux" ]]; then PLATFORM="XFree86" TYPE="Linux"
         elif [[ "${ARGS[$i + 1]}" == "FreeBSD" ]]; then PLATFORM="XFree86" TYPE="FreeBSD"
         elif [[ "${ARGS[$i + 1]}" == "SunOS"  || "${ARGS[$i + 1]}" == "Solaris" ]]; then PLATFORM="Solaris"
+        else
+            echo "Invalid platform option"
+            echo "Options can be: Linux, FreeBSD, SunOS or Solaris"
+            exit
         fi
         i=$((i + 1))
         continue
@@ -117,23 +121,23 @@ for (( i=0; i<$#; i++ )); do
 done
 
 if [[ -z "${VERSION}" ]]; then
-    echo "version is not declared"
-    echo "declare it with -V or --version"
-    echo "for example: --version 470.256.02"
+    echo "Version is not declared"
+    echo "Declare it with -V or --version"
+    echo "For example: --version 470.256.02"
     exit
 fi
 
 if [[ -z "${PLATFORM}" ]]; then
-    echo "failed to detect PLATFORM"
-    echo "use instead -P or --platform "
-    echo "for example: --platform linux"
+    echo "Failed to detect PLATFORM"
+    echo "Use instead -P or --platform "
+    echo "For example: --platform linux"
     exit
 fi
 
 if [[ -z "${ARCH}" ]]; then
-    echo "failed to detect ARCH"
-    echo "use instead -A or --arch"
-    echo "for example: --arch x86_64"
+    echo "Failed to detect ARCH"
+    echo "Use instead -A or --arch"
+    echo "For example: --arch x86_64"
     exit
 fi
 
