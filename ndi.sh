@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Platform
 # Options:
@@ -72,94 +72,96 @@
 # Latest Legacy GPU version (96.43.xx series): 96.43.23
 # Latest Legacy GPU version (173.14.xx series): 173.14.39
 
-if [[ "$(uname --kernel-name)" == "Linux" ]]; then PLATFORM="XFree86" TYPE="Linux"
+if [ "$(uname --kernel-name)" = "Linux" ]; then PLATFORM="XFree86" TYPE="Linux"
 
-elif [[ "$(uname --kernel-name)" == "FreeBSD" ]]; then PLATFORM="XFree86" TYPE="FreeBSD"
+elif [ "$(uname --kernel-name)" = "FreeBSD" ]; then PLATFORM="XFree86" TYPE="FreeBSD"
 
-elif [[ "$(uname --kernel-name)" == "SunOS" ]]; then PLATFORM="Solaris"
-
-fi
-
-if [[ "$(uname --machine)" == "x86_64" ]]; then ARCH="x86_64"
-
-elif [[ "$(uname --machine)" == "i686" ]]; then ARCH="x86"
-
-elif [[ "$(uname --machine)" == "aarch64" ]]; then ARCH="aarch64"
-
-elif [[ "$(uname --machine)" == "armv7l" ]]; then ARCH="arm"
+elif [ "$(uname --kernel-name)" = "SunOS" ]; then PLATFORM="Solaris"
 
 fi
 
-ARGS=("$@")
-INSTALLER_ARGS=""
-INSTALLER_ARGS+="--rebuild-initramfs --silent "
+if [ "$(uname --machine)" = "x86_64" ]; then ARCH="x86_64"
 
-for (( i=0; i<$#; i++ )); do
+elif [ "$(uname --machine)" = "i686" ]; then ARCH="x86"
 
-    if [[ "${ARGS[$i]}" == "-P" ]] || [[ "${ARGS[$i]}" == "--platform" ]]; then
-        if [[ "${ARGS[$i + 1]}" == "Linux" ]]; then PLATFORM="XFree86" TYPE="Linux"
-        elif [[ "${ARGS[$i + 1]}" == "FreeBSD" ]]; then PLATFORM="XFree86" TYPE="FreeBSD"
-        elif [[ "${ARGS[$i + 1]}" == "SunOS"  || "${ARGS[$i + 1]}" == "Solaris" ]]; then PLATFORM="Solaris"
-        else
-            echo "Invalid platform option"
-            echo "Options can be: Linux, FreeBSD, SunOS or Solaris"
-            exit
-        fi
-        i=$((i + 1))
-        continue
-    fi
+elif [ "$(uname --machine)" = "aarch64" ]; then ARCH="aarch64"
 
-    if [[ "${ARGS[$i]}" == "-A" ]] || [[ "${ARGS[$i]}" == "--arch" ]]; then 
-        ARCH="${ARGS[$i + 1]}" 
-        i=$((i + 1)) 
-        continue
-    fi
+elif [ "$(uname --machine)" = "armv7l" ]; then ARCH="arm"
 
-    if [[ "${ARGS[$i]}" == "-V" ]] || [[ "${ARGS[$i]}" == "--version" ]]; then  
-        VERSION="${ARGS[$i + 1]}" 
-        i=$((i + 1)) 
-        continue
-    fi
+fi
 
-    if [[ "${ARGS[$i]}" == "--open" ]]; then  
-        INSTALLER_ARGS+="--kernel-module-type=open "
-        i=$((i + 1)) 
-        continue
-    fi
+INSTALLER_ARGS="--rebuild-initramfs --silent "
 
-    if [[ "${ARGS[$i]}" == "--propietary" ]]; then  
-        INSTALLER_ARGS+="--kernel-module-type=propietary "
-        i=$((i + 1)) 
-        continue
-    fi
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        -P|--platform)
+            shift  
+            case "$1" in
+                Linux)
+                    PLATFORM="XFree86"
+                    TYPE="Linux"
+                    ;;
+                FreeBSD)
+                    PLATFORM="XFree86"
+                    TYPE="FreeBSD"
+                    ;;
+                SunOS|Solaris)
+                    PLATFORM="Solaris"
+                    ;;
+                *)
+                    echo "Invalid platform option"
+                    echo "Options can be: Linux, FreeBSD, SunOS or Solaris"
+                    exit 1
+                    ;;
+            esac
+            ;;
+        -A|--arch)
+            shift  
+            ARCH="$1"
+            ;;
+        -V|--version)
+            shift  
+            VERSION="$1"
+            ;;
+        --open)
+            INSTALLER_ARGS="$INSTALLER_ARGS--kernel-module-type=open "
+            ;;
+        --propietary)
+            INSTALLER_ARGS="$INSTALLER_ARGS--kernel-module-type=propietary "
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+    shift  
 done
-
-if [[ -z "${VERSION}" ]]; then
+if [ -z "${VERSION}" ]; then
     echo "Version is not declared"
     echo "Declare it with -V or --version"
     echo "For example: --version 470.256.02"
     exit
 fi
 
-if [[ -z "${PLATFORM}" ]]; then
+if [ -z "${PLATFORM}" ]; then
     echo "Failed to detect PLATFORM"
     echo "Use instead -P or --platform "
     echo "For example: --platform linux"
     exit
 fi
 
-if [[ -z "${ARCH}" ]]; then
+if [ -z "${ARCH}" ]; then
     echo "Failed to detect ARCH"
     echo "Use instead -A or --arch"
     echo "For example: --arch x86_64"
     exit
 fi
 
-if [[ "$ARCH " == "arm" ]]; then
+if [ "$ARCH " = "arm" ]; then
     FILE=NVIDIA-${TYPE}-armv7l-gnueabihf-${VERSION}.run
     URL=https://us.download.nvidia.com/${PLATFORM}/${TYPE}-x86-ARM/${VERSION}/${FILE}
 
-elif [[ "$PLATFORM" == "Solaris" ]]; then
+elif [ "$PLATFORM" = "Solaris" ]; then
     FILE=NVIDIA-$PLATFORM-x86-${VERSION}.run
     URL=https://us.download.nvidia.com/solaris/${VERSION}/${FILE}
 else
