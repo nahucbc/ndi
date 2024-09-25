@@ -92,14 +92,27 @@ fi
 
 ARGS=("$@")
 
-for (( i=0; i<=$#; i++ )); do
+for (( i=0; i<$#; i++ )); do
 
-    if [[ "${ARGS[$i]}" == "-P" ]] || [[ "${ARGS[$i]}" == "--platform" ]]; then PLATFORM="${ARGS[$i + 1]}"
+    if [[ "${ARGS[$i]}" == "-P" ]] || [[ "${ARGS[$i]}" == "--platform" ]]; then
+        if [[ "${ARGS[$i + 1]}" == "Linux" ]]; then PLATFORM="XFree86" TYPE="Linux"
+        elif [[ "${ARGS[$i + 1]}" == "FreeBSD" ]]; then PLATFORM="XFree86" TYPE="FreeBSD"
+        elif [[ "${ARGS[$i + 1]}" == "SunOS" ]]; then PLATFORM="Solaris"
+        fi
+        i=$((i + 1))
+        continue
+    fi
 
-    elif [[ "${ARGS[$i]}" == "-A" ]] || [[ "${ARGS[$i]}" == "--arch" ]]; then ARCH="${ARGS[$i + 1]}" 
+    if [[ "${ARGS[$i]}" == "-A" ]] || [[ "${ARGS[$i]}" == "--arch" ]]; then 
+        ARCH="${ARGS[$i + 1]}" 
+        i=$((i + 1)) 
+        continue
+    fi
 
-    elif [[ "${ARGS[$i]}" == "-V" ]] || [[ "${ARGS[$i]}" == "--version" ]]; then  VERSION="${ARGS[$i + 1]}" 
-
+    if [[ "${ARGS[$i]}" == "-V" ]] || [[ "${ARGS[$i]}" == "--version" ]]; then  
+        VERSION="${ARGS[$i + 1]}" 
+        i=$((i + 1)) 
+        continue
     fi
 done
 
