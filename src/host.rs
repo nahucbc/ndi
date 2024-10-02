@@ -1,5 +1,5 @@
 enum Platform {
     Linux,
     FreeBSD,
-    SunOS
+    Solaris
 }
