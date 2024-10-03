@@ -4,6 +4,12 @@ pub enum Platform {
     Solaris
 }
 
+enum Kind {
+    Linux,
+    FreeBSD,
+    Solaris
+}
+
 pub enum Architecture {
     X86_64,
     X86,
