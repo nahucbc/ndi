@@ -1,6 +1,6 @@
 use uname::uname;
 
-struct Target {
+pub struct Target {
     platform : Platform,
     kind : Kind, 
     architecture : Architecture
