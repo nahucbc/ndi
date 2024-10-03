@@ -1,3 +1,5 @@
+use uname::uname;
+
 struct Target {
     platform : Platform,
     kind : Kind, 
@@ -26,6 +28,15 @@ pub enum Architecture {
     X86,
     Aarch64,
     Arm
+}
+
+pub fn get_target() -> Target {
+    let host = uname().unwrap();
+    let kind = get_kind(&host.sysname).unwrap();
+    let platform = get_platform(&kind).unwrap();
+    let architecture = get_architecture(&host.machine).unwrap();
+    let target = Target::new(platform, kind, architecture);
+    return target;
 }
 
 pub fn get_platform(kind : &Kind) -> Option<Platform> {
