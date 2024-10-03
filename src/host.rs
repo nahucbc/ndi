@@ -1,6 +1,6 @@
 pub enum Platform {
     Linux,
-    XFreeBSD,
+    XFree86,
     Solaris
 }
 
@@ -14,7 +14,7 @@ pub enum Architecture {
 pub fn get_platform(platform : &str) -> Option<Platform> {
     match platform {
         "Linux" => Some(Platform::Linux),
-        "FreeBSD" => Some(Platform::XFreeBSD),
+        "FreeBSD" => Some(Platform::XFree86),
         "SunOS" => Some(Platform::Solaris),
         _ => None
     }
