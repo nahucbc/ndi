@@ -1,17 +1,5 @@
 use uname::uname;
 
-pub struct Target {
-    platform : Platform,
-    kind : Kind, 
-    architecture : Architecture
-}
-
-impl Target {
-    pub fn new(platform : Platform, kind : Kind, architecture : Architecture) -> Target {
-        Target {platform, kind, architecture}
-    }
-}
-
 pub enum Platform {
     XFree86,
     Solaris
@@ -29,6 +17,19 @@ pub enum Architecture {
     Aarch64,
     Arm
 }
+
+pub struct Target {
+    platform : Platform,
+    kind : Kind, 
+    architecture : Architecture
+}
+
+impl Target {
+    pub fn new(platform : Platform, kind : Kind, architecture : Architecture) -> Target {
+        Target {platform, kind, architecture}
+    }
+}
+
 
 pub fn get_target() -> Target {
     let host = uname().unwrap();
