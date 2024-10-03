@@ -16,6 +16,15 @@ pub enum Architecture {
     Arm
 }
 
+pub fn get_platform(kind : Kind) -> Option<Platform> {
+    match kind {
+        Kind::Linux => Some(Platform::XFree86),
+        Kind::FreeBSD => Some(Platform::XFree86),
+        Kind::Solaris => Some(Platform::Solaris),
+        _ => None
+    }
+}
+
 pub fn get_kind(kind : &str) -> Option<Kind> {
     match kind {
         "Linux" => Some(Kind::Linux),
