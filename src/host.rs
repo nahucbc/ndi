@@ -5,10 +5,30 @@ pub enum Platform {
     Solaris
 }
 
+impl Platform {
+    
+    pub fn to_string(&self) -> String {
+        match self {
+            Platform::XFree86 => String::from("XFree86"),
+            Platform::Solaris => String::from("Solaris")
+        }
+    }
+}
 pub enum Kind {
     Linux,
     FreeBSD,
     Solaris
+}
+
+impl Kind{
+    
+    pub fn to_string(&self) -> String {
+        match self {
+            Kind::FreeBSD => String::from("FreeBSD"),
+            Kind::Linux => String::from("Linux"),
+            Kind::Solaris => String::from("Solaris")
+        }
+    }
 }
 
 pub enum Architecture {
@@ -16,6 +36,18 @@ pub enum Architecture {
     X86,
     Aarch64,
     Arm
+}
+
+impl Architecture {
+    
+    pub fn to_string(&self) -> String {
+        match self {
+            Architecture::X86_64 => String::from("x86_64"),
+            Architecture::X86 => String::from("x86"),
+            Architecture::Aarch64 => String::from("aarch64"),
+            Architecture::Arm => String::from("arm")
+        }
+    }
 }
 
 pub struct Target {
