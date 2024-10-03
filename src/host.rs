@@ -17,11 +17,11 @@ pub enum Architecture {
     Arm
 }
 
-pub fn get_platform(platform : &str) -> Option<Platform> {
-    match platform {
-        "Linux" => Some(Platform::Linux),
-        "FreeBSD" => Some(Platform::XFree86),
-        "SunOS" => Some(Platform::Solaris),
+pub fn get_kind(kind : &str) -> Option<Kind> {
+    match kind {
+        "Linux" => Some(Kind::Linux),
+        "FreeBSD" => Some(Kind::FreeBSD),
+        "SunOS" => Some(Kind::Solaris),
         _ => None
     }
 }
