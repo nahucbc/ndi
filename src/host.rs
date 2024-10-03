@@ -3,7 +3,7 @@ pub enum Platform {
     Solaris
 }
 
-enum Kind {
+pub enum Kind {
     Linux,
     FreeBSD,
     Solaris
