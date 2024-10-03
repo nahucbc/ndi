@@ -1,5 +1,4 @@
 pub enum Platform {
-    Linux,
     XFree86,
     Solaris
 }
