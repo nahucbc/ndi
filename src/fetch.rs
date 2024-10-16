@@ -10,11 +10,15 @@ pub async fn download(version : &String) -> Result<(), Box<dyn std::error::Error
     if architecture == "arm" {
         (file_name, url) = arm_target(platform, kind, version);
 
+    } else if architecture == "aarch64" {
+        (file_name, url) = aarch64_target(platform, kind, architecture, version);
+
     } else if platform == "Solaris" {
         (file_name, url) = solaris_target(platform, version);
 
     } else {
         (file_name, url) = default_target(platform, kind, architecture, version);
+
     }
     
     let response = reqwest::get(url).await?;
@@ -31,6 +35,12 @@ pub async fn download(version : &String) -> Result<(), Box<dyn std::error::Error
 
     Ok(())
     
+}
+
+fn aarch64_target(platform : &'static str, kind : &'static str, architecture : &'static str, version : &String)  -> (String, String) {
+    let file_name : String = format!("NVIDIA-{}-{}-{}.run", kind, architecture, version);
+    let url : String = format!("https://us.download.nvidia.com/{}/{}/{}/{}", platform, architecture, version, file_name);
+    return (file_name, url).into();
 }
 
 fn arm_target(platform : &'static str, kind : &'static str, version : &String) -> (String, String) {

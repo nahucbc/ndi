@@ -32,7 +32,7 @@ fn get_architecture(machine : &String) -> Option<&'static str>{
     match architecture {
         "x86_64" => Some("x86_64"),
         "i686" => Some("i686"),
-        "aarch64" => Some("Solaris"),
+        "aarch64" => Some("aarch64"),
         "armv7l" => Some("armv7l"),
          _ => None
     }
