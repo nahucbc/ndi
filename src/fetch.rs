@@ -60,3 +60,60 @@ fn x86_64_target(platform : &'static str, kind : &'static str, architecture : &'
     let url : String = format!("https://us.download.nvidia.com/{}/{}-{}/{}/{}", platform, kind, architecture, version, file_name);
     return (file_name, url).into();
 }
+
+mod fetch {
+
+    #[tokio::test]
+    async fn aarch64_target_test() {
+        let platform : &'static str = "XFree86";
+        let kind : &'static str = "Linux";
+        let architecture: &'static str = "aarch64";
+        let version : &String = &String::from("550.120");
+        
+        let (_file_name, url) = crate::fetch::aarch64_target(platform, kind, architecture, version);
+
+        let response = reqwest::get(url).await.expect("request failed");
+
+        assert!(response.status().is_success());
+    }
+
+    #[tokio::test]
+    async fn arm_target_test() {
+        let platform : &'static str = "XFree86";
+        let kind : &'static str = "Linux";
+        let version : &String = &String::from("390.157");
+        
+        let (_file_name, url) = crate::fetch::arm_target(platform, kind, version);
+
+        let response = reqwest::get(url).await.expect("request failed");
+
+        assert!(response.status().is_success());
+    }
+
+    #[tokio::test]
+    async fn solaris_target_test() {
+        let platform : &'static str = "Solaris";
+        let version = &String::from("550.120");
+        
+        let (_file_name, url) = crate::fetch::solaris_target(platform, version);
+
+        let response = reqwest::get(url).await.expect("request failed");
+
+        assert!(response.status().is_success());
+    }
+
+    #[tokio::test]
+    async fn x86_64_target_test() {
+        let platform : &'static str = "XFree86";
+        let kind : &'static str = "Linux";
+        let architecture: &'static str = "x86_64";
+        let version : &String = &String::from("550.120");
+        
+        let (_file_name, url) = crate::fetch::x86_64_target(platform, kind, architecture, version);
+
+        let response = reqwest::get(url).await.expect("request failed");
+
+        assert!(response.status().is_success());
+    }
+    
+}
