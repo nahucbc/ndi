@@ -61,7 +61,8 @@ fn x86_64_target(platform : &'static str, kind : &'static str, architecture : &'
     return (file_name, url).into();
 }
 
-mod fetch {
+#[cfg(test)]
+mod tests {
 
     #[tokio::test]
     async fn aarch64_target_test() {
