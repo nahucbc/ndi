@@ -17,7 +17,7 @@ pub async fn download(version : &String) -> Result<(), Box<dyn std::error::Error
         (file_name, url) = solaris_target(platform, version);
 
     } else {
-        (file_name, url) = default_target(platform, kind, architecture, version);
+        (file_name, url) = x86_64_target(platform, kind, architecture, version);
 
     }
     
@@ -55,7 +55,7 @@ fn solaris_target(platform : &'static str, version : &String) -> (String, String
     return (file_name, url).into();
 }
 
-fn default_target(platform : &'static str, kind : &'static str, architecture : &'static str, version : &String)  -> (String, String) {
+fn x86_64_target(platform : &'static str, kind : &'static str, architecture : &'static str, version : &String)  -> (String, String) {
     let file_name : String = format!("NVIDIA-{}-{}-{}.run", kind, architecture, version);
     let url : String = format!("https://us.download.nvidia.com/{}/{}-{}/{}/{}", platform, kind, architecture, version, file_name);
     return (file_name, url).into();
