@@ -50,7 +50,7 @@ fn arm_target(platform : &'static str, kind : &'static str, version : &String) -
 }
 
 fn solaris_target(platform : &'static str, version : &String) -> (String, String) {
-    let file_name : String = format!("NVIDIA-{}-x86-${}.run", platform, version);
+    let file_name : String = format!("NVIDIA-{}-x86-{}.run", platform, version);
     let url : String = format!("https://us.download.nvidia.com/solaris/{}/{}", version, file_name);
     return (file_name, url).into();
 }
